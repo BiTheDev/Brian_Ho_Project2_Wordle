@@ -8,14 +8,20 @@ import Normal_Level from "../normalLevel/Normal_Level";
 
 function Home() {
   return (
-    <Paper variant="outlined">
+    <Paper 
+    variant="outlined"
+    sx={{
+        width: 400,
+        height: 600,
+        backgroundColor: 'white',
+      }}
+    >
       <Container maxWidth="xl">
         <Typography variant="h1" component="h2">
           Home
         </Typography>
         <Typography
             variant="h6"
-            noWrap
             component="a"
             href="/level_hard"
             sx={{
@@ -47,6 +53,23 @@ function Home() {
             }}
           >
             Normal
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/game_rules"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            Game Rules
           </Typography>
       </Container>
     </Paper>
