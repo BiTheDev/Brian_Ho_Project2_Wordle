@@ -17,10 +17,11 @@ function Normal_Level() {
     "Lagoon",
   ];
   const getSystemSelectedWord = () => {
-      return normalWordLst[Math.floor(Math.random() * normalWordLst.length)];
+    return normalWordLst[Math.floor(Math.random() * normalWordLst.length)];
   };
   const [guessCount, setGuessCount] = useState(0);
   const [gameWon, setGameWon] = useState(false);
+  const [typedWords, setTypedWords] = useState([]);
   const [guess, setGuess] = useState("");
   const [feedback, setFeedback] = useState([]);
   const [systemSelectedWord, setSystemSelectedWord] = useState(
@@ -34,16 +35,16 @@ function Normal_Level() {
     const wordArr = systemSelectedWord.toLowerCase().split("");
     const guessArr = guess.split("");
     let isCorrect = true;
-    console.log(guessArr.length)
-    console.log(wordArr.length)
+    console.log(guessArr.length);
+    console.log(wordArr.length);
     // check if the guess is the correct length
     if (guessArr.length !== wordArr.length) {
       newFeedback.push("Invalid guess length");
     } else {
       // check each letter of the guess against the word
       for (let i = 0; i < wordArr.length; i++) {
-        console.log(guessArr[i])
-        console.log(wordArr[i])
+        console.log(guessArr[i]);
+        console.log(wordArr[i]);
         if (guessArr[i] === wordArr[i]) {
           newFeedback.push("Correct");
         } else if (wordArr.includes(guessArr[i])) {
@@ -54,19 +55,19 @@ function Normal_Level() {
           isCorrect = false;
         }
       }
+      setTypedWords([...typedWords, guess]);
       if (isCorrect) {
         setGameWon(true);
-        setSystemSelectedWord(getSystemSelectedWord)
+        setSystemSelectedWord(getSystemSelectedWord);
       }
     }
-  
+
     setFeedback(newFeedback);
     setGuess("");
     setGuessCount(guessCount + 1);
-    const inputs = document.querySelectorAll(".guess-input");
+    const inputs = document.querySelectorAll("input");
     inputs.forEach((input) => (input.value = ""));
   };
-  
 
   return (
     <Paper
@@ -91,7 +92,6 @@ function Normal_Level() {
               key={index}
               type="text"
               maxLength="1"
-              // value={letter.toUpperCase()}
               variant="outlined"
               size="small"
               readOnly={feedback.length > index}
@@ -101,8 +101,19 @@ function Normal_Level() {
                 newGuessArr[index] = event.target.value.toLowerCase();
                 setGuess(newGuessArr.join(""));
               }}
+              // onKeyDown={(event) => {
+              //   if (event.key === "Enter") {
+              //     const nextInput =
+              //       event.target.parentElement.parentElement.nextElementSibling.querySelectorAll("input");
+              //     console.log(nextInput)
+              //     if (nextInput) {
+              //       nextInput[0].focus();
+              //     }
+              //   }
+              // }}
             />
           ))}
+
           <Button variant="contained" color="primary" type="submit">
             Guess
           </Button>
