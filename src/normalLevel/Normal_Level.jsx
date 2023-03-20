@@ -10,6 +10,7 @@ import {
 // import { useDispatch, useSelector } from "react-redux";
 import "./Normal_Level.css";
 import GuessForm from "../guessForm/Guess_Form";
+import GuessFeedback from "../GuessFeedback/Guess_FeedBack";
 
 function Normal_Level() {
   const normalWordLst = [
@@ -135,29 +136,11 @@ function Normal_Level() {
             onGuessChange ={handleGuess}
             onSubmit = {handleSubmit}
           />
-          {/* <form className="guess-form" onSubmit={handleSubmit}>
-            {systemSelectedWord.split("").map((letter, index) => (
-              <TextField
-                key={index}
-                type="text"
-                maxLength="1"
-                variant="outlined"
-                size="small"
-                readOnly={feedback.length > index}
-                className={`guess-input ${feedback[index]}`}
-                onChange={(event) => {
-                  const newGuessArr = guess.split("");
-                  newGuessArr[index] = event.target.value.toLowerCase();
-                  setGuess(newGuessArr.join(""));
-                }}
-              />
-            ))}
-
-            <Button variant="contained" color="primary" type="submit">
-              Guess
-            </Button>
-          </form> */}
-          <Box className="feedback">
+          <GuessFeedback
+            feedback = {feedback}
+            typedWords = {typedWords}
+          />
+          {/* <Box className="feedback">
             {feedback.map((item, index) => (
               <Typography
                 key={index}
@@ -188,7 +171,7 @@ function Normal_Level() {
                 {item}
               </Typography>
             ))}
-          </Box>
+          </Box> */}
         </Box>
       </Container>
     </Paper>
