@@ -6,7 +6,7 @@ function Hard_Level() {
     const hardWordList = ['Scuttle', 'Distort', 'Stipend', 'Candida', 'Glimmer', 'Nostalg', 'Porous', 'Tension', 'Vanquish', 'Whimsy']
     const systemSelect = hardWordList[Math.floor(Math.random() * hardWordList.length)]
   return (
-    <Paper 
+    <Paper
     variant="outlined"
     sx={{
         width: 400,

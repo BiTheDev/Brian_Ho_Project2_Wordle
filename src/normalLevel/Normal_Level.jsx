@@ -3,9 +3,7 @@ import {
   Typography,
   Paper,
   Container,
-  Button,
   Box,
-  TextField,
 } from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
 import "./Normal_Level.css";
@@ -75,8 +73,6 @@ function Normal_Level() {
 
     setFeedback(newFeedback);
     setGuess("");
-    const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => (input.value = ""));
   };
 
   return (
@@ -141,6 +137,12 @@ function Normal_Level() {
             typedWords = {typedWords}
             guessCount = {guessCount}
           />
+        {gameWon ?
+          <Typography variant="body1">
+            Congratulations!  Would you like to try again?
+          </Typography>:
+          null
+        }
         </Box>
       </Container>
     </Paper>
