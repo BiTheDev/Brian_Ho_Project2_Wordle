@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 
 function GuessFeedback(props) {
-  const {feedback, typedWords} = props;
+  const {feedback, typedWords, guessCount} = props;
 
   return (
     <Box>
@@ -27,6 +27,9 @@ function GuessFeedback(props) {
       <Box>
         <Typography variant="h6" component="h6">
           Guessed Words
+        </Typography>
+        <Typography variant="body2" >
+          Guessed Count : {guessCount}
         </Typography>
         {typedWords.map((item, index) => (
           <Typography key={index} variant="body1" style={{ margin: "0 4px" }}>
