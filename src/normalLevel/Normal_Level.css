@@ -20,7 +20,8 @@
   }
   
   .close {
-    background-color: white;
+    background-color: yellow;
+    color:black;
   }
   
   .wrong {
@@ -45,7 +46,7 @@
   }
   
   .Close {
-    color: black;
+    color: yellow;
   }
   
   .Wrong {

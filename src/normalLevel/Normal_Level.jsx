@@ -1,7 +1,15 @@
 import { useState } from "react";
-import { Typography, Paper, Container, Button, TextField } from "@mui/material";
+import {
+  Typography,
+  Paper,
+  Container,
+  Button,
+  Box,
+  TextField,
+} from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
 import "./Normal_Level.css";
+import GuessForm from "../guessForm/Guess_Form";
 
 function Normal_Level() {
   const normalWordLst = [
@@ -27,7 +35,10 @@ function Normal_Level() {
   const [systemSelectedWord, setSystemSelectedWord] = useState(
     getSystemSelectedWord()
   );
-  console.log(systemSelectedWord);
+
+  const handleGuess = (guess) =>{
+    setGuess(guess)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,8 +54,6 @@ function Normal_Level() {
     } else {
       // check each letter of the guess against the word
       for (let i = 0; i < wordArr.length; i++) {
-        console.log(guessArr[i]);
-        console.log(wordArr[i]);
         if (guessArr[i] === wordArr[i]) {
           newFeedback.push("Correct");
         } else if (wordArr.includes(guessArr[i])) {
@@ -82,61 +91,6 @@ function Normal_Level() {
         <Typography variant="h3" component="h3">
           Normal level
         </Typography>
-
-        <Typography variant="body1" gutterBottom>
-          Guess the 6-letter word:
-        </Typography>
-        <form className="guess-form" onSubmit={handleSubmit}>
-          {systemSelectedWord.split("").map((letter, index) => (
-            <TextField
-              key={index}
-              type="text"
-              maxLength="1"
-              variant="outlined"
-              size="small"
-              readOnly={feedback.length > index}
-              className={`guess-input ${feedback[index]}`}
-              onChange={(event) => {
-                const newGuessArr = guess.split("");
-                newGuessArr[index] = event.target.value.toLowerCase();
-                setGuess(newGuessArr.join(""));
-              }}
-              // onKeyDown={(event) => {
-              //   if (event.key === "Enter") {
-              //     const nextInput =
-              //       event.target.parentElement.parentElement.nextElementSibling.querySelectorAll("input");
-              //     console.log(nextInput)
-              //     if (nextInput) {
-              //       nextInput[0].focus();
-              //     }
-              //   }
-              // }}
-            />
-          ))}
-
-          <Button variant="contained" color="primary" type="submit">
-            Guess
-          </Button>
-        </form>
-        <div className="feedback">
-          {feedback.map((item, index) => (
-            <Typography
-              key={index}
-              variant="body1"
-              className={
-                item === "Correct"
-                  ? "correct"
-                  : item === "Wrong"
-                  ? "wrong"
-                  : "close"
-              }
-              style={{ margin: "0 4px" }}
-            >
-              {item}
-            </Typography>
-          ))}
-        </div>
-
         <Typography
           variant="h6"
           noWrap
@@ -144,12 +98,11 @@ function Normal_Level() {
           href="/"
           sx={{
             mr: 2,
-            display: { xs: "none", md: "flex" },
+            display: { xs: "block", md: "flex" },
             fontFamily: "monospace",
             fontWeight: 700,
             letterSpacing: ".3rem",
             color: "inherit",
-            textDecoration: "none",
           }}
         >
           Return to Home
@@ -162,16 +115,81 @@ function Normal_Level() {
           href="/game_rules"
           sx={{
             mr: 2,
-            display: { xs: "none", md: "flex" },
+            display: { xs: "block", md: "flex" },
             fontFamily: "monospace",
             fontWeight: 700,
             letterSpacing: ".3rem",
             color: "inherit",
-            textDecoration: "none",
           }}
         >
           Game Rules
         </Typography>
+        <Box>
+          <Typography variant="body1" gutterBottom>
+            Guess the 6-letter word:
+          </Typography>
+          <GuessForm
+            feedback ={feedback}
+            systemSelectedWord = {systemSelectedWord}
+            guess = {guess}
+            onGuessChange ={handleGuess}
+            onSubmit = {handleSubmit}
+          />
+          {/* <form className="guess-form" onSubmit={handleSubmit}>
+            {systemSelectedWord.split("").map((letter, index) => (
+              <TextField
+                key={index}
+                type="text"
+                maxLength="1"
+                variant="outlined"
+                size="small"
+                readOnly={feedback.length > index}
+                className={`guess-input ${feedback[index]}`}
+                onChange={(event) => {
+                  const newGuessArr = guess.split("");
+                  newGuessArr[index] = event.target.value.toLowerCase();
+                  setGuess(newGuessArr.join(""));
+                }}
+              />
+            ))}
+
+            <Button variant="contained" color="primary" type="submit">
+              Guess
+            </Button>
+          </form> */}
+          <Box className="feedback">
+            {feedback.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                className={
+                  item === "Correct"
+                    ? "correct"
+                    : item === "Wrong"
+                    ? "wrong"
+                    : "close"
+                }
+                style={{ margin: "0 4px" }}
+              >
+                {item}
+              </Typography>
+            ))}
+          </Box>
+          <Box>
+            <Typography variant="h6" component="h6">
+              Guessed Words
+            </Typography>
+            {typedWords.map((item, index) => (
+              <Typography
+                key={index}
+                variant="body1"
+                style={{ margin: "0 4px" }}
+              >
+                {item}
+              </Typography>
+            ))}
+          </Box>
+        </Box>
       </Container>
     </Paper>
   );
