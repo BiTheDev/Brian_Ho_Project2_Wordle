@@ -6,7 +6,7 @@ function GuessFeedback(props) {
 
   return (
     <Box>
-      {/* <Box className="feedback">
+      <Box className="feedback">
         {feedback.map((item, index) => (
           <Typography
             key={index}
@@ -23,7 +23,7 @@ function GuessFeedback(props) {
             {item}
           </Typography>
         ))}
-      </Box> */}
+      </Box>
       <Box>
         <Typography variant="h6" component="h6">
           Guessed Words

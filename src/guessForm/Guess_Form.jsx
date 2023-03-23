@@ -14,6 +14,7 @@ function GuessForm(props) {
     setNewGuessArr(updatedArr);
     props.onGuessChange(updatedArr.join(""));
   };
+
   return (
     <form className="guess-form" onSubmit={onSubmit}>
       {systemSelectedWord.split("").map((letter, index) => (
