@@ -1,25 +1,24 @@
 import { useState } from "react";
 import { Typography, Paper, Container, Box, Button } from "@mui/material";
-// import { useDispatch, useSelector } from "react-redux";
 import "./Normal_Level.css";
 import GuessForm from "../guessForm/Guess_Form";
 import GuessFeedback from "../GuessFeedback/Guess_FeedBack";
 
 function Normal_Level() {
-  const normalWordLst = [
-    "Impair",
-    "Pundit",
-    "Hurtle",
-    "Jovial",
-    "Gambit",
+  const normalWordList = [
+    "Guitar",
+    "Method",
+    "Insect",
+    "Spirit",
+    "Forest",
     "Juggle",
     "Unreal",
-    "Hallow",
-    "Fringe",
+    "Rocket",
+    "Doctor",
     "Lagoon",
   ];
   const getSystemSelectedWord = () => {
-    return normalWordLst[Math.floor(Math.random() * normalWordLst.length)];
+    return normalWordList[Math.floor(Math.random() * normalWordList.length)];
   };
   const [guessCount, setGuessCount] = useState(0);
   const maxGuessCount = 6;
@@ -128,7 +127,7 @@ function Normal_Level() {
         </Typography>
         <Box>
           <Typography variant="body1" gutterBottom>
-            Guess the 6-letter word:
+            Guess the {systemSelectedWord.length}-letter word:
           </Typography>
           <GuessForm
             feedback={feedback}
