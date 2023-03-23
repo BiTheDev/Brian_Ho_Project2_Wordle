@@ -52,6 +52,7 @@ function Home() {
           >
             Normal Level
           </Typography>
+          
           <Typography
             variant="h6"
             noWrap
