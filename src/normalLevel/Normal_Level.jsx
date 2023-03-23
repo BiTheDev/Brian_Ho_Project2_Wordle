@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-  Typography,
-  Paper,
-  Container,
-  Box,
-} from "@mui/material";
+import { Typography, Paper, Container, Box, Button } from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
 import "./Normal_Level.css";
 import GuessForm from "../guessForm/Guess_Form";
@@ -27,7 +22,9 @@ function Normal_Level() {
     return normalWordLst[Math.floor(Math.random() * normalWordLst.length)];
   };
   const [guessCount, setGuessCount] = useState(0);
+  const maxGuessCount = 6;
   const [gameWon, setGameWon] = useState(false);
+  const [gameLost, setGameLost] = useState(false);
   const [typedWords, setTypedWords] = useState([]);
   const [guess, setGuess] = useState("");
   const [feedback, setFeedback] = useState([]);
@@ -35,23 +32,24 @@ function Normal_Level() {
     getSystemSelectedWord()
   );
 
-  const handleGuess = (guess) =>{
-    setGuess(guess)
-  }
+  const handleGuess = (guess) => {
+    setGuess(guess);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const newFeedback = [];
     const wordArr = systemSelectedWord.toLowerCase().split("");
     const guessArr = guess.split("");
+    console.log(wordArr.length)
+    console.log(guessArr.length)
     let isCorrect = true;
-    console.log(guessArr.length);
-    console.log(wordArr.length);
     // check if the guess is the correct length
     if (guessArr.length !== wordArr.length) {
       newFeedback.push("Invalid guess length");
     } else {
-      setGuessCount(guessCount + 1);
+      let currentGuess = guessCount
+      setGuessCount(currentGuess + 1);
       // check each letter of the guess against the word
       for (let i = 0; i < wordArr.length; i++) {
         if (guessArr[i] === wordArr[i]) {
@@ -68,6 +66,9 @@ function Normal_Level() {
       if (isCorrect) {
         setGameWon(true);
         setSystemSelectedWord(getSystemSelectedWord);
+      }
+      if (guessCount+1 === maxGuessCount) {
+        setGameLost(true);
       }
     }
 
@@ -126,23 +127,37 @@ function Normal_Level() {
             Guess the 6-letter word:
           </Typography>
           <GuessForm
-            feedback ={feedback}
-            systemSelectedWord = {systemSelectedWord}
-            guess = {guess}
-            onGuessChange ={handleGuess}
-            onSubmit = {handleSubmit}
+            feedback={feedback}
+            systemSelectedWord={systemSelectedWord}
+            guess={guess}
+            onGuessChange={handleGuess}
+            onSubmit={handleSubmit}
           />
           <GuessFeedback
-            feedback = {feedback}
-            typedWords = {typedWords}
-            guessCount = {guessCount}
+            feedback={feedback}
+            typedWords={typedWords}
+            guessCount={guessCount}
           />
-        {gameWon ?
-          <Typography variant="body1">
-            Congratulations!  Would you like to try again?
-          </Typography>:
-          null
-        }
+          {gameWon ? (
+            <Box>
+              <Typography variant="body1">
+                Congratulations! Would you like to try again?
+              </Typography>
+              <Button type="button" onClick={window.location.reload()}>
+                <span>Try Again</span>
+              </Button>
+            </Box>
+          ) : null}
+          {gameLost ? (
+            <Box>
+            <Typography variant="body1">
+              Guess Count reached, would you like to try again?
+            </Typography>
+            <Button type="button" onClick={window.location.reload()}>
+              <span>Try Again</span>
+            </Button>
+          </Box>
+          ) : null}
         </Box>
       </Container>
     </Paper>

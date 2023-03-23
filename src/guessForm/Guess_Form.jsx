@@ -1,8 +1,19 @@
 import React from "react";
+import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 
 function GuessForm(props) {
-  const { feedback, systemSelectedWord, guess, onGuessChange, onSubmit } = props;
+  const { feedback, systemSelectedWord, guess, onGuessChange, onSubmit } =
+    props;
+  const [newGuessArr, setNewGuessArr] = useState(Array(6).fill(""));
+
+  const handleGuessChange = (event, index) => {
+    const newValue = event.target.value.toLowerCase();
+    const updatedArr = [...newGuessArr];
+    updatedArr[index] = newValue;
+    setNewGuessArr(updatedArr);
+    props.onGuessChange(updatedArr.join(""));
+  };
   return (
     <form className="guess-form" onSubmit={onSubmit}>
       {systemSelectedWord.split("").map((letter, index) => (
@@ -14,11 +25,8 @@ function GuessForm(props) {
           size="small"
           readOnly={feedback.length > index}
           className={`guess-input ${feedback[index]}`}
-          onChange={(event) => {
-            const newGuessArr = guess.split("");
-            newGuessArr[index] = event.target.value.toLowerCase();
-            onGuessChange(newGuessArr.join(""));
-          }}
+          value={newGuessArr[index]}
+          onChange={(event) => handleGuessChange(event, index)}
         />
       ))}
       <Button variant="contained" color="primary" type="submit">
