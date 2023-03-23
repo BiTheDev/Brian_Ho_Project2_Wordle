@@ -36,6 +36,10 @@ function Normal_Level() {
     setGuess(guess);
   };
 
+  const handleTryAgain = () => {
+    window.location.reload();
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newFeedback = [];
@@ -143,7 +147,7 @@ function Normal_Level() {
               <Typography variant="body1">
                 Congratulations! Would you like to try again?
               </Typography>
-              <Button type="button" onClick={window.location.reload()}>
+              <Button type="button" onClick={handleTryAgain}>
                 <span>Try Again</span>
               </Button>
             </Box>
@@ -153,7 +157,7 @@ function Normal_Level() {
             <Typography variant="body1">
               Guess Count reached, would you like to try again?
             </Typography>
-            <Button type="button" onClick={window.location.reload()}>
+            <Button type="button" onClick={handleTryAgain}>
               <span>Try Again</span>
             </Button>
           </Box>
