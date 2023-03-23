@@ -1,0 +1,56 @@
+.guess-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.guess-input {
+  margin: 0 0.5rem;
+  width: 3ch;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 1.5rem;
+}
+
+.correct {
+  background-color: green;
+  color: white;
+}
+
+.close {
+  background-color: yellow;
+}
+
+.wrong {
+  background-color: red;
+  color: white;
+}
+
+.feedback {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.feedback-item {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+}
+
+.Correct {
+  /* Remove color styling */
+  background-color: green;
+}
+
+.Close {
+  /* Remove color styling */
+  background-color: yellow;
+}
+
+.Wrong {
+  /* Remove color styling */
+  background-color: red;
+}
