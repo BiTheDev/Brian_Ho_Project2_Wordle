@@ -44,8 +44,6 @@ function Normal_Level() {
     const newFeedback = [];
     const wordArr = systemSelectedWord.toLowerCase().split("");
     const guessArr = guess.split("");
-    console.log(wordArr.length)
-    console.log(guessArr.length)
     let isCorrect = true;
     // check if the guess is the correct length
     if (guessArr.length !== wordArr.length) {
